@@ -25,14 +25,14 @@
 
             <!-- // Survey button: -->
             <a href="file:///C:/rutgershw/FriendFinder/app/public/survey.html"><button
-                    class="btn btn-lg btn-primary"><span class="fa fa-list-alt"></span> Go To
+                    class="btn btn-lg btn-primary" id="surveyBtn"><span class="fa fa-list-alt"></span> Go To
                     Survey</button></a>
         </div>
     </div>
 
     <!-- // API Route & GitHub Repo: -->
     <div class="container">
-        <a href="/apiRoutes">API Friends List</a> | <a href="https://github.com/Grishma9911/FriendFinder">GitHub Repo</a>
+        <a href="/app/data/friends" id="apiroute">API Friends List</a> | <a href="https://github.com/Grishma9911/FriendFinder">GitHub Repo</a>
     </div>
 
     <!-- // style css: -->
@@ -53,6 +53,23 @@
             font-size: 30px;
         }
     </style>
+     <!-- // Java Script Functionality: --> 
+     <script type="text/javascript">
+
+        $("#apiroute").on("click", function (event) {
+            app.get("/app/data/friends", function(req, res) {
+            return res.json(nameArrey);
+});
+     
+    });
+
+    $("#surveyBtn").on("click", function (event) {
+            app.get("/app/public/survey", function(req, res) {
+            return res.json(nameArrey);
+});
+     
+    });
+    </script>
 </body>
 
 </html>

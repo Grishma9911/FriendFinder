@@ -31,9 +31,11 @@
     </div>
 
     <!-- // API Route & GitHub Repo: -->
+    <footer class="footer">
     <div class="container">
-        <a href="/app/data/friends" id="apiroute">API Friends List</a> | <a href="https://github.com/Grishma9911/FriendFinder">GitHub Repo</a>
+        <a href="/data/friends" id="apiroute">API Friends List</a> | <a href="https://github.com/Grishma9911/FriendFinder">GitHub Repo</a>
     </div>
+    </footer>
 
     <!-- // style css: -->
     <style>
@@ -56,15 +58,17 @@
      <!-- // Java Script Functionality: --> 
      <script type="text/javascript">
 
-        $("#apiroute").on("click", function (event) {
-            app.get("/app/data/friends", function(req, res) {
-            return res.json(nameArrey);
-});
+//         $("#apiroute").on("click", function (event) {
+//             app.get("/app/data/friends", function(req, res) {
+//             return res.json(nameArrey);
+// });
      
-    });
+//     });
 
     $("#surveyBtn").on("click", function (event) {
-            app.get("/app/public/survey", function(req, res) {
+        event.preventDefault();
+        console.log("this is home.html page for survey button!!")
+            app.get("/data/friends", function(req, res) {
             return res.json(nameArrey);
 });
      

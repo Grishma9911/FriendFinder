@@ -23,7 +23,6 @@ module.exports = function(app) {
     res.json(friendsData);
   });
 
-
   // API POST Requests
   // Below code handles when a user submits a form and thus submits data to the server.
   // In each of the below cases, when a user submits form data (a JSON object)
@@ -33,16 +32,48 @@ module.exports = function(app) {
   // ---------------------------------------------------------------------------
 
   app.post("/data/friends", function(req, res) {
-    // Note the code here. Our "server" will respond to requests and let users know if they have a table or not.
+    console.log("Inside Post Method");
+
+    var newFriend = req.body;
+    console.log("new friend: "+ JSON.stringify(newFriend));
+    var scoresArray = [];
+    var friendCount = 0;
+    var bestMatch = 0;
+
+    for(var i=0;i<friendsData.length;i++){
+      var diff = 0;
+
+      for(var j=0;j<newFriend.scores.length;j++){
+         diff = diff + (Math.abs(parseInt(friendsData[i].scores[j]) - parseInt(newFriend.scores[j])));
+      }
+
+      scoresArray.push(diff);
+    }
+
+    for(var i=0; i<scoresArray.length;i++){
+      if(scoresArray[i] < scoresArray[bestMatch]){
+        bestMatch = i;
+      }
+    }
+
+    var bff = friendsData[bestMatch];
+    res.json(bff);
+
+    friendsData.push(newFriend);
+
+
+
+
+        // Note the code here. Our "server" will respond to requests and let users know if they have a table or not.
     // It will do this by sending out the value "true" have a table
     // req.body is available since we're using the body parsing middleware
-    if (friendsData.length < 5) {
-      friendsData.push(req.body);
-      res.json(true);
-    }
-    else {
-        res.json(false);
-    }
+    // if (friendsData.length < 5) {
+    //   friendsData.push(req.body);
+    //   res.json(true);
+    // }
+    // else {
+    //     res.json(false);
+    // }
   });
 
   // ---------------------------------------------------------------------------
